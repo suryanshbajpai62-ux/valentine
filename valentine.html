@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine’s Day ❤️</title>
+
+<style>
+    body {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        background: linear-gradient(135deg, #ff4b8b, #ff69b4);
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-top: 40px;
+    }
+
+    p {
+        font-size: 1.3em;
+        margin: 15px 0;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 1em;
+        border: none;
+        border-radius: 25px;
+        background: white;
+        color: #ff4b8b;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 22px;
+        animation: fall 6s linear infinite;
+    }
+
+    @keyframes fall {
+        0% { top: -10%; opacity: 1; }
+        100% { top: 110%; opacity: 0; }
+    }
+
+    img {
+        width: 90%;
+        max-width: 300px;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Happy Valentine’s Day, <span id="name"></span> ❤️</h1>
+
+<p>
+Roses are red,<br>
+Violets are blue,<br>
+Life may be stupid,<br>
+But I’m lucky with you 💖
+</p>
+
+<button onclick="playMusic()">🎶 Tap to Play Music</button>
+
+<p style="margin-top:20px;">
+<button onclick="alert('You make my world brighter every day 😘')">
+💌 Click for Surprise
+</button>
+</p>
+
+<img src="https://via.placeholder.com/300x200/ff0000/ffffff?text=LOVE+YOU" alt="Love">
+
+<audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    // Typing name effect
+    const name = "Tanya";
+    let i = 0;
+    function typeName() {
+        if (i < name.length) {
+            document.getElementById("name").innerHTML += name.charAt(i);
+            i++;
+            setTimeout(typeName, 200);
+        }
+    }
+    typeName();
+
+    // Play music (Android safe)
+    function playMusic() {
+        document.getElementById("bgMusic").play();
+    }
+
+    // Falling hearts
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 500);
+</script>
+
+</body>
+  </html>
