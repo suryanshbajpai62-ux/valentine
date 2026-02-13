@@ -2,116 +2,172 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine’s Day ❤️</title>
+<title>Valentine Night 💖</title>
 
 <style>
     body {
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        background: linear-gradient(135deg, #ff4b8b, #ff69b4);
-        color: white;
-        text-align: center;
         margin: 0;
-        padding: 20px;
         overflow: hidden;
+        font-family: 'Segoe UI', sans-serif;
+        background: radial-gradient(circle at top, #1b2735, #090a0f);
+        height: 100vh;
+        color: white;
+    }
+
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
     }
 
     h1 {
-        font-size: 2.5em;
-        margin-top: 40px;
+        font-size: 3rem;
+        text-shadow: 0 0 20px pink;
+        animation: glow 2s infinite alternate;
     }
 
     p {
-        font-size: 1.3em;
-        margin: 15px 0;
+        font-size: 1.3rem;
+        opacity: 0.9;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 10px #ff4d6d; }
+        to { text-shadow: 0 0 30px #ff99ac; }
     }
 
     button {
-        padding: 12px 25px;
-        font-size: 1em;
+        margin-top: 20px;
+        padding: 12px 30px;
         border: none;
-        border-radius: 25px;
-        background: white;
-        color: #ff4b8b;
-        font-weight: bold;
+        border-radius: 30px;
+        background: #ff3366;
+        color: white;
+        font-size: 1rem;
         cursor: pointer;
+        box-shadow: 0 0 15px pink;
     }
 
+    button:hover {
+        background: #ff0033;
+    }
+
+    /* Heart Rain */
     .heart {
-        position: absolute;
-        font-size: 22px;
-        animation: fall 6s linear infinite;
+        position: fixed;
+        top: -10px;
+        color: #ff4d6d;
+        animation: fall linear forwards;
+        opacity: 0.8;
     }
 
     @keyframes fall {
-        0% { top: -10%; opacity: 1; }
-        100% { top: 110%; opacity: 0; }
+        to {
+            transform: translateY(110vh);
+        }
     }
 
-    img {
-        width: 90%;
-        max-width: 300px;
-        border-radius: 15px;
-        margin-top: 20px;
+    /* Floating Messages */
+    .message {
+        position: fixed;
+        bottom: -50px;
+        font-size: 1.2rem;
+        color: #ffd6e0;
+        animation: floatUp 8s linear forwards;
+        text-shadow: 0 0 10px pink;
+    }
+
+    @keyframes floatUp {
+        to {
+            transform: translateY(-120vh);
+            opacity: 0;
+        }
+    }
+
+    /* Stars */
+    .star {
+        position: fixed;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+        from { opacity: 0.3; }
+        to { opacity: 1; }
     }
 </style>
 </head>
 
 <body>
 
-<h1>Happy Valentine’s Day, <span id="name"></span> ❤️</h1>
+<div class="center">
+    <h1>Happy Valentine’s Night 💘</h1>
+    <p>Under the glowing stars, my heart is yours 🌙✨</p>
+    <button onclick="playMusic()">Play Romantic Music 🎶</button>
+</div>
 
-<p>
-Roses are red,<br>
-Violets are blue,<br>
-Life may be stupid,<br>
-But I’m lucky with you 💖
-</p>
-
-<button onclick="playMusic()">🎶 Tap to Play Music</button>
-
-<p style="margin-top:20px;">
-<button onclick="alert('You make my world brighter every day 😘')">
-💌 Click for Surprise
-</button>
-</p>
-
-<img src="https://via.placeholder.com/300x200/ff0000/ffffff?text=LOVE+YOU" alt="Love">
-
-<audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<audio id="music" loop>
+    <source src="romantic-music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-    // Typing name effect
-    const name = "Tanya";
-    let i = 0;
-    function typeName() {
-        if (i < name.length) {
-            document.getElementById("name").innerHTML += name.charAt(i);
-            i++;
-            setTimeout(typeName, 200);
-        }
-    }
-    typeName();
-
-    // Play music (Android safe)
-    function playMusic() {
-        document.getElementById("bgMusic").play();
-    }
-
-    // Falling hearts
+    /* Heart Rain */
     function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 7000);
+
+        setTimeout(() => heart.remove(), 6000);
     }
-    setInterval(createHeart, 500);
+    setInterval(createHeart, 250);
+
+    /* Floating Love Messages */
+    const messages = [
+        "I love you 💕",
+        "Forever & Always 💖",
+        "You are my universe 🌙",
+        "My heart beats for you 💓",
+        "Endless love ✨",
+        "Be mine 💘"
+    ];
+
+    function createMessage() {
+        const msg = document.createElement('div');
+        msg.className = 'message';
+        msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+        msg.style.left = Math.random() * 80 + 'vw';
+        document.body.appendChild(msg);
+
+        setTimeout(() => msg.remove(), 8000);
+    }
+    setInterval(createMessage, 2000);
+
+    /* Stars */
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        document.body.appendChild(star);
+    }
+
+    function playMusic() {
+        document.getElementById('music').play();
+    }
 </script>
 
 </body>
-  </html>
+</html>
